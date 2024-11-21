@@ -10,18 +10,18 @@ enum state {
 };
 
 struct process {
-    unsigned int p_id;      // Prozess-ID
-    enum state p_state;     // Zustand des Prozesses
-    struct process *next;   // Nächster Prozess in einer Warteschlange
+    unsigned int p_id;      
+    enum state p_state;     
+    struct process *next;   
 };
 
 struct queue {
-    struct process *head;   // Kopf der Warteschlange
-    struct process *tail;   // Ende der Warteschlange
+    struct process *head;   
+    struct process *tail;   
 };
 
 // Funktionen für Warteschlangen
 void enqueue(struct queue *q, struct process *p);
 struct process *dequeue(struct queue *q);
 
-#endif // PROCESS_H
+#endif

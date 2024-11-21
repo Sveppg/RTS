@@ -3,10 +3,8 @@
 
 #include <stdint.h>
 
-// Definition eines Signal-Sets mit maximal 32 Signalen
 typedef uint32_t my_sigset_t;
 
-// Funktionen zur Manipulation von Signal-Sets
 void my_sigemptyset(my_sigset_t *set);
 void my_sigfillset(my_sigset_t *set);
 int my_sigaddset(my_sigset_t *set, int signum);

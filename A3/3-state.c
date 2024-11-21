@@ -4,19 +4,17 @@
 #include <signal.h>
 #include "process.h"
 
-// Globale Variablen
 struct queue qready = {0};
 struct queue qblocked = {0};
 struct process *running = NULL;
 
-// Funktion zur Änderung des Zustands
 void p_switch_state(struct process *p, enum state new_state) {
     printf("Process %d: State changed from %d -> %d\n", p->p_id, p->p_state, new_state);
     p->p_state = new_state;
 }
 
 void print_queue(const struct queue *q, const char *name){
-    printf("%s Queue: ", name);
+    printf("%s Queue: \n", name);
     if (!q->head) {
         printf("Empty\n");
         return;
@@ -32,7 +30,6 @@ void print_queue(const struct queue *q, const char *name){
 }
 
 
-// Funktion zur Ausgabe des aktuellen Kontextes
 void print_context() {
     print_queue(&qready, "Ready");
     print_queue(&qblocked, "Blocked");
@@ -44,7 +41,7 @@ void print_context() {
 
 }
 
-// Signalhandler für SIGUSR1
+//SIGUSR1
 void handle_sigusr1() {
     if (running) {
         printf("SIGUSR1 received: Blocking process %d\n", running->p_id);
@@ -54,7 +51,7 @@ void handle_sigusr1() {
     }
 }
 
-// Signalhandler für SIGUSR2
+//SIGUSR2
 void handle_sigusr2() {
     struct process *unblocked = dequeue(&qblocked);
     if (unblocked) {
@@ -75,14 +72,10 @@ void initialize_processes(int num) {
 }
 
 int main() {
-    // Signalhandler einrichten
     signal(SIGUSR1, handle_sigusr1);
     signal(SIGUSR2, handle_sigusr2);
-
-    // Prozesse initialisieren
     initialize_processes(10);
 
-    // Hauptsimulation
     while (1) {
         if (!running) {
             running = dequeue(&qready);
@@ -92,9 +85,8 @@ int main() {
         }
 
         print_context();
-        sleep(2); // Wartezeit für Simulation
+        sleep(2);
 
-        // Simulieren, dass der Prozess fertig ist
         if (running) {
             printf("Process %d finished running.\n", running->p_id);
             free(running);

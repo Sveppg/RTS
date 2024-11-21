@@ -5,16 +5,15 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-volatile sig_atomic_t n = 0; // Anzahl der aktiven Kindprozesse
+volatile sig_atomic_t n = 0;
 
-// Signalhandler für SIGCHLD
 void sigchld_handler() {
     int status;
     pid_t pid;
 
     // Warten auf beendete Kindprozesse
     while ((pid = waitpid(-1, &status, WNOHANG)) > 0) {
-        n--; // Decrementiere die Anzahl der Kindprozesse
+        n--;
         if (WIFEXITED(status)) {
             printf("Child %d: terminated with status %d (n=%d)\n", pid, WEXITSTATUS(status), n);
         } else if (WIFSIGNALED(status)) {
@@ -37,7 +36,6 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
 
-    // Signalhandler einrichten
     struct sigaction sa;
     sa.sa_handler = sigchld_handler;
     sa.sa_flags = SA_RESTART | SA_NOCLDSTOP;
@@ -48,7 +46,6 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
 
-    // Kindprozesse erzeugen
     for (int i = 0; i < k; i++) {
         pid_t pid = fork();
         if (pid < 0) {
@@ -68,9 +65,8 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    // Elternprozess wartet, bis n == 0
     while (n > 0) {
-        pause(); // Warten auf ein Signal
+        pause();
     }
 
     printf("All child processes have exited. Parent exiting (n=%d).\n", n);
