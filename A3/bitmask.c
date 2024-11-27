@@ -11,11 +11,11 @@ int main() {
     my_sigfillset(&set);
     printf("Nach my_sigfillset: 0x%08X\n", set);
 
-    // Füge Signal 5 hinzu
+    // add signal 5 
     my_sigaddset(&set, 5);
     printf("Nach my_sigaddset(5): 0x%08X\n", set);
 
-    // Entferne Signal 5
+    // del Signal 5
     my_sigdelset(&set, 5);
     printf("Nach my_sigdelset(5): 0x%08X\n", set);
 

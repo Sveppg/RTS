@@ -55,7 +55,7 @@ int main(int argc, char *argv[]) {
         if (pid == 0) {
             // Kindprozess
             printf("Child %d: started (n=%d)\n", getpid(), n);
-            sleep(2); // Kindprozess simuliert Arbeit
+            sleep(2);
             printf("Child %d: exiting (n=%d)\n", getpid(), n);
             exit(0);
         } else {

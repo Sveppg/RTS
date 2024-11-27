@@ -74,7 +74,7 @@ void initialize_processes(int num) {
 int main() {
     signal(SIGUSR1, handle_sigusr1);
     signal(SIGUSR2, handle_sigusr2);
-    initialize_processes(10);
+    initialize_processes(20);
 
     while (1) {
         if (!running) {
