@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>  
 #include "queue.h"
+#include "process.h"
 
 int main() {
     struct queue q = {NULL, NULL};  // Initialisiere die Queue
@@ -14,7 +15,10 @@ int main() {
     q_add(&q, &p2);
 
     printf("Inhalt der Queue vor dem Entfernen: \n");
-    q_print(&q);
+    q_print(&q, state_str(READY));
+    q_print(&q, state_str(BLOCKED));
+
+
 
     struct process *removed = q_remove(&q);
     if (removed != NULL) {
@@ -25,7 +29,7 @@ int main() {
     }
 
     printf("\nInhalt der Queue nach dem Entfernen eines Prozesses: \n");
-    q_print(&q);
+    q_print(&q, sta);
 
     return 0;
 }

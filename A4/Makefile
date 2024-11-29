@@ -1,8 +1,10 @@
 CFLAGS = -W -Wall -Wextra -Werror 
 
-all: Quersumme oracle client
+all:Quersumme2 Quersumme oracle client
 
-Quersumme: Quersumme.c 
+Quersumme: Quersumme.c functions.c
+
+Quersumme2: Quersumme2.c functions.c
 
 oracle: oracle.c 
 

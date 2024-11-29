@@ -6,9 +6,9 @@
 struct pctx {
     struct queue *qready;
     struct process *running;
+    struct queue *qblocked;
 };
 
-// Funktionsprototypen
 void print(struct pctx *ctx);
 void step(struct pctx *ctx);
 

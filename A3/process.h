@@ -15,13 +15,14 @@ struct process {
     struct process *next;   
 };
 
-struct queue {
-    struct process *head;   
-    struct process *tail;   
-};
+void p_switch_state(struct process *p, enum state new_state);
 
-// Funktionen für Warteschlangen
-void enqueue(struct queue *q, struct process *p);
-struct process *dequeue(struct queue *q);
+void print_context();
+
+void handle_sigusr1();
+
+void handle_sigusr2();
+
+void initialize_processes(int num);
 
 #endif

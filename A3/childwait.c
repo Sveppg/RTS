@@ -5,23 +5,10 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-volatile sig_atomic_t n = 0;
+sig_atomic_t n = 0;
 
 void sigchld_handler() {
-    int status;
-    pid_t pid;
-
-    // Warten auf beendete Kindprozesse
-    while ((pid = waitpid(-1, &status, WNOHANG)) > 0) {
-        n--;
-        if (WIFEXITED(status)) {
-            printf("Child %d: terminated with status %d (n=%d)\n", pid, WEXITSTATUS(status), n);
-        } else if (WIFSIGNALED(status)) {
-            printf("Child %d: terminated by signal %d (n=%d)\n", pid, WTERMSIG(status), n);
-        } else {
-            printf("Child %d: terminated abnormally (n=%d)\n", pid, n);
-        }
-    }
+    printf("Child %d: terminated (n=%d)\n", wait(NULL), --n);
 }
 
 int main(int argc, char *argv[]) {
@@ -54,19 +41,17 @@ int main(int argc, char *argv[]) {
         }
         if (pid == 0) {
             // Kindprozess
-            printf("Child %d: started (n=%d)\n", getpid(), n);
-            sleep(2);
-            printf("Child %d: exiting (n=%d)\n", getpid(), n);
+            sleep(i+1);
             exit(0);
         } else {
             // Elternprozess
             n++;
-            printf("Parent %d: Child %d started (n=%d)\n", getpid(), pid, n);
+            printf("Child %d started (n=%d)\n", pid, n);
         }
     }
 
     while (n > 0) {
-        pause();
+        sleep(2);
     }
 
     printf("All child processes have exited. Parent exiting (n=%d).\n", n);

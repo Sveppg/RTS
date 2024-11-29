@@ -8,11 +8,11 @@
 
 int main(int argc, char* argv[]) {
     if (argc != 2) {
-        fprintf(stderr, "Verwendung: %s \"Frage\"\n", argv[0]);
+        fprintf(stderr, "Verwendung: %s Stelle eine Frage\n", argv[0]);  //error handling
         return EXIT_FAILURE;
     }
 
-    const char* question = argv[1];
+    const char *question = argv[1];
     char ask_fifo[] = "ask.me";
     char response_fifo[20];
     char message[512];

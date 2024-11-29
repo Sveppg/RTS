@@ -16,7 +16,7 @@
     // Funktionsprototypen
     void q_add(struct queue *q, struct process *p);
     struct process *q_remove(struct queue *q);
-    void q_print(struct queue *q);
+    void q_print(struct queue *q, const char *name);
 
 #endif
 
