@@ -15,9 +15,9 @@ int is_vowel(char c) {
 }
 
 void handle_message(const char* message) {
-    char pid[10], question[256], response_fifo[20];
+    char pid[10], question[BUF_SIZE], response_fifo[20];
     int response_fd;
-    char response[256];
+    char response[BUF_SIZE];
 
     if (sscanf(message, "%9[^:]:%255[^\n]", pid, question) != 2) {
         fprintf(stderr, "Ungültige Nachricht: %s\n", message);
