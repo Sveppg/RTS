@@ -6,6 +6,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+#define BUF_SIZE 512
+
 int main(int argc, char* argv[]) {
     if (argc != 2) {
         fprintf(stderr, "Verwendung: %s Stelle eine Frage\n", argv[0]);  //error handling
@@ -15,8 +17,8 @@ int main(int argc, char* argv[]) {
     const char *question = argv[1];
     char ask_fifo[] = "ask.me";
     char response_fifo[20];
-    char message[512];
-    char response[256];
+    char message[BUF_SIZE];
+    char response[BUF_SIZE];
     int pid = getpid();
 
 // response von fifo

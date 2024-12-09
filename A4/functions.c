@@ -76,7 +76,7 @@ char **read_file(const char *filename) {
             free(line);
             continue;
         }
-        char **temp = realloc(lines, (count + 1) * sizeof(char *));
+        char **temp = realloc(lines, (count * 2) * sizeof(char *));  //verdoppeln nicht +1
         if (!temp) {
             perror("Speicherzuweisung fehlgeschlagen!");
             free(line);
@@ -89,7 +89,7 @@ char **read_file(const char *filename) {
         lines[count++] = line;
     }
     fclose(f);
-    lines = realloc(lines, (count + 1) * sizeof(char *));
+    lines = realloc(lines, (count * 2) * sizeof(char *));
     if (!lines) {
         perror("Speicherzuweisung fehlgeschlagen!");
         return NULL;
