@@ -1,0 +1,30 @@
+digraph {
+t1 [style=filled, fillcolor=green];
+t2 [style=filled, fillcolor=green];
+t3 [style=filled, fillcolor=green];
+t4 [style=filled, fillcolor=green];
+t5 [style=filled, fillcolor=green];
+t6 [style=filled, fillcolor=green];
+t7 [style=filled, fillcolor=green];
+r1 [shape=box, style=filled, fillcolor=orange];
+r2 [shape=box, style=filled, fillcolor=orange];
+r3 [shape=box, style=filled, fillcolor=orange];
+r4 [shape=box, style=filled, fillcolor=orange];
+r5 [shape=box, style=filled, fillcolor=orange];
+r6 [shape=box, style=filled, fillcolor=orange];
+t1 -> r2;
+t2 -> r3;
+t3 -> r2;
+t4 -> r2;
+t4 -> r3;
+t5 -> r5;
+t6 -> r2;
+t7 -> r4;
+r1 -> t1;
+r1 -> t3;
+r1 -> t5;
+r2 -> t2;
+r4 -> t4;
+r5 -> t7;
+r6 -> t6;
+}
